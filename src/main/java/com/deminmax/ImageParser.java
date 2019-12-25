@@ -11,10 +11,6 @@ import java.util.List;
 
 public class ImageParser {
 
-    public ImageParser(String url) throws IOException {
-        parseHTMLFromURL(url);
-    }
-
     public  ListLinks parseHTMLFromURL(String url) throws IOException {
         List<String> links = new ArrayList<>();
 
