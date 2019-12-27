@@ -2,6 +2,7 @@ import com.deminmax.DownloadImages;
 import com.deminmax.ImageParser;
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.nio.file.Path;
 
 public class Main {
 
@@ -10,7 +11,9 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         try {
-            DownloadImages.downloadsImages(new ImageParser().parseHTMLFromURL(URL_LENTARU));
+            Path pathDestinationFromUser = DownloadImages.pathFomUser();
+            ImageParser imageParser = new ImageParser(URL_LENTARU);
+            DownloadImages.downloadsImages(imageParser.parseHTMLFromURL(), pathDestinationFromUser);
         } catch (UnknownHostException ex) {
             ex.printStackTrace();
         }
