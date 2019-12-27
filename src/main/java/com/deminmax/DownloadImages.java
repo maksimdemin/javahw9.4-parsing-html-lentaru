@@ -3,8 +3,6 @@ package com.deminmax;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.io.FilenameUtils;
 
-import javax.imageio.ImageIO;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.file.Files;
@@ -16,11 +14,9 @@ public class DownloadImages {
     public static void downloadsImages(ListLinks links, Path dstPath) {
             links.getListLinks().forEach(link -> {
                 try {
-                    URL url = new URL(link);
-                    ImageIO.write(ImageIO.read(url), "png", new File("/Users/maksimdemin/IdeaProjects/javahw9.4-parsing-html-lentaru/download/" + link.substring(link.lastIndexOf('/') + 1)));
-//                    Path dstFilePath = getPathToNewImageFile(url.toString(), dstPath);
-//                    FileUtils.copyURLToFile(url, dstFilePath.toFile());
-//                    System.out.println("Copy image to: " + dstFilePath);
+                    Path dstFilePath = getPathToNewImageFile(link, dstPath);
+                    FileUtils.copyURLToFile(new URL(link), dstFilePath.toFile());
+                    System.out.printf("Copy image %-45s to directory: %s%n", FilenameUtils.getName(link), dstPath);
 
                 } catch (IOException ex) {
                     ex.printStackTrace();
@@ -28,19 +24,18 @@ public class DownloadImages {
             });
     }
 
-    public static Path getPathToNewImageFile(String url, Path dstPath) {
-        return dstPath.resolve(FilenameUtils.getName(url));
+    public static Path getPathToNewImageFile(String link, Path dstPath) {
+        return dstPath.resolve(FilenameUtils.getName(link));
     }
 
-    public static Path pathFomUser() {
+    public static Path pathFromUser() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("Enter destination path: ");
             Path path = Path.of(scanner.nextLine());
             if (path.getParent() != null && Files.isWritable(path.getParent()) || Files.isWritable(path))
                 return path;
-            System.out.println("Destination is inaccessible");
-            System.out.println();
+            System.out.println("The path not exist");
         }
     }
 }

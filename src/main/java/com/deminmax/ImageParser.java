@@ -19,9 +19,9 @@ public class ImageParser {
         List<String> links = new ArrayList<>();
 
         Document document = Jsoup.connect(URL_CONTENT).get();
-        Elements elements = document.select("img[src~=(?i)\\.(png|jpe?g|gif)]");
+        Elements elements = document.select("img[src~=(?i)\\.(png|jpe?g)]");
         elements.forEach(element -> {
-            links.add(element.attr("src"));
+            links.add(element.attr("abs:src"));
         });
         return new ListLinks(links);
     }
