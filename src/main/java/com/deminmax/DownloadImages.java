@@ -1,8 +1,4 @@
 package com.deminmax;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.FilenameUtils;
-
 import javax.imageio.ImageIO;
 import java.io.File;
 import java.io.IOException;
@@ -16,20 +12,16 @@ public class DownloadImages {
     public static void downloadsImages(ListLinks links, Path dstPath) {
             links.getListLinks().forEach(link -> {
                 try {
+                    String nameNewImageFile = link.substring(link.lastIndexOf('/') + 1);
+                    String pathToNewImageFile = dstPath + "/" + nameNewImageFile;
+                    String formatImageName = link.substring(link.lastIndexOf('.') + 1);
                     URL url = new URL(link);
-                    ImageIO.write(ImageIO.read(url), "png", new File("/Users/maksimdemin/IdeaProjects/javahw9.4-parsing-html-lentaru/download/" + link.substring(link.lastIndexOf('/') + 1)));
-//                    Path dstFilePath = getPathToNewImageFile(url.toString(), dstPath);
-//                    FileUtils.copyURLToFile(url, dstFilePath.toFile());
-//                    System.out.println("Copy image to: " + dstFilePath);
-
+                    ImageIO.write(ImageIO.read(url), formatImageName, new File(pathToNewImageFile));
+                    System.out.printf("Copy image %-50s to directory: %s%n", nameNewImageFile, dstPath);
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             });
-    }
-
-    public static Path getPathToNewImageFile(String url, Path dstPath) {
-        return dstPath.resolve(FilenameUtils.getName(url));
     }
 
     public static Path pathFomUser() {
