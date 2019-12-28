@@ -17,11 +17,11 @@ public class DownloadImages {
                     Path dstFilePath = getPathToNewImageFile(link, dstPath);
                     FileUtils.copyURLToFile(new URL(link), dstFilePath.toFile());
                     System.out.printf("Copy image %-45s to directory: %s%n", FilenameUtils.getName(link), dstPath);
-
                 } catch (IOException ex) {
                     ex.printStackTrace();
                 }
             });
+        System.out.printf("Copied %s image(s)", links.getListLinks().size());
     }
 
     public static Path getPathToNewImageFile(String link, Path dstPath) {

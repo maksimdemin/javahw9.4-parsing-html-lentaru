@@ -7,7 +7,6 @@ public class ListLinks {
 
     private List<String> listLinks;
 
-
     public ListLinks(List<String> listLinks) {
         this.listLinks = listLinks;
     }
