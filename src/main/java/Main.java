@@ -11,7 +11,8 @@ public class Main {
         try {
             Path pathDestinationFromUser = DownloadImages.pathFromUser();
             ImageParser imageParser = new ImageParser(URL_LENTARU);
-            DownloadImages.downloadsImages(imageParser.parseHTMLFromURL(), pathDestinationFromUser);
+            DownloadImages.downloadImageAndPrintFailedLinks(imageParser.parseHTMLFromURL(), pathDestinationFromUser);
+//            DownloadImages.printAllBadLinks(imageParser.parseHTMLFromURL());
         } catch (Exception ex) {
             ex.printStackTrace();
         }

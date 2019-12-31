@@ -11,6 +11,11 @@ import java.util.Scanner;
 
 public class DownloadImages {
 
+    public static void downloadImageAndPrintFailedLinks(ListLinks links, Path dstPath) {
+        downloadsImages(links, dstPath);
+        printAllBadLinks(links);
+    }
+
     public static void downloadsImages(ListLinks links, Path dstPath) {
             links.getListLinks().forEach(link -> {
                 try {
@@ -22,6 +27,7 @@ public class DownloadImages {
                 }
             });
         System.out.printf("Copied %s image(s)", links.getListLinks().size());
+        System.out.println();
     }
 
     public static Path getPathToNewImageFile(String link, Path dstPath) {
@@ -37,6 +43,15 @@ public class DownloadImages {
                 return path;
             System.out.println("The path not exist");
         }
+    }
+
+    public static void printAllBadLinks(ListLinks links) {
+        if (!links.isFailedLinks(links)) {
+            System.out.printf("Checked links has %d failed link(s)", links.getListFailedLinks().size());
+            for (String b : links.getListFailedLinks()) {
+                System.out.println(b);
+            }
+        } else System.out.println("Checked links has 0 failed link(s)");
     }
 }
 
