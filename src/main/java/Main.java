@@ -11,7 +11,7 @@ public class Main {
     public static void main(String[] args) throws IOException {
 
         try {
-            Path pathDestinationFromUser = DownloadImages.pathFomUser();
+            Path pathDestinationFromUser = DownloadImages.pathFromUser();
             ImageParser imageParser = new ImageParser(URL_LENTARU);
             DownloadImages.downloadsImages(imageParser.parseHTMLFromURL(), pathDestinationFromUser);
         } catch (UnknownHostException ex) {

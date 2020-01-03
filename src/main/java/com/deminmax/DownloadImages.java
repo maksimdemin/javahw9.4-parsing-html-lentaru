@@ -24,7 +24,7 @@ public class DownloadImages {
             });
     }
 
-    public static Path pathFomUser() {
+    public static Path pathFromUser() {
         Scanner scanner = new Scanner(System.in);
         while (true) {
             System.out.print("Enter destination path: ");
